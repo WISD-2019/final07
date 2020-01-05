@@ -12,8 +12,8 @@ class Cart extends Model
         return $this->hasOne(Member::class);
     }
 
-    //public function prodcut()
-    //{
-    //    return $this->hasMany(Cartofproduct::class);
-    //}
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }
