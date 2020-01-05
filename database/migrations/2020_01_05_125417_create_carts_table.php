@@ -17,6 +17,10 @@ class CreateCartsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('product_id');
             $table->integer('member_id');
+            $table->string('product');
+            $table->integer('cost');
+            $table->integer('total');
+            $table->integer('qty');
             $table->timestamps();
         });
     }
