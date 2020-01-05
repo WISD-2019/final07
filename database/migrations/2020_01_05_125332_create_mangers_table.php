@@ -15,6 +15,9 @@ class CreateMangersTable extends Migration
     {
         Schema::create('mangers', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('user_id');
+            $table->integer('order_id');
+            $table->integer('product_id');
             $table->timestamps();
         });
     }
