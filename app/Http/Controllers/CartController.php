@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use DB;
 
 class CartController extends Controller
 {
@@ -15,6 +17,20 @@ class CartController extends Controller
     public function index()
     {
         //
+        if (Auth::check()) {
+            $all = 0;
+            $data = DB::table('carts')
+                ->where('member_id', Auth::user()->id)
+                ->get();
+            foreach ($data as $s) {
+                $all = $all + $s->total;
+            }
+            return view('cart', ['carts' => $data, 'a' => $all]);
+        }
+        else
+        {
+            return redirect()->route('login');
+        }
     }
 
     /**
@@ -67,9 +83,17 @@ class CartController extends Controller
      * @param  \App\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cart $cart)
+    public function update($id,$q)
     {
         //
+        $cost = DB::table('carts')->where('id',$id)->value('cost');
+        DB::table('carts')
+            ->where('id',$id)
+            ->update([
+                'qty' => $q,
+                'total' =>$cost * $q
+            ]);
+        return redirect()->route('cart');
     }
 
     /**
@@ -81,5 +105,33 @@ class CartController extends Controller
     public function destroy(Cart $cart)
     {
         //
+    }
+
+    public function add($id)
+    {
+        if (Auth::check())
+        {
+            $product = DB::table('products')->where('id', $id)->value('productname');
+            $price = DB::table('products')->where('id', $id)->value('price');
+            DB::table('carts')->insert(
+                [
+                    'product'=>$product,
+                    'cost'=>$price,
+                    'total'=>$price,
+                    'member_id'=>Auth::user()->id
+                ]
+            );
+            return Redirect::to(url()->previous());
+        }
+        else
+        {
+            return redirect()->route('login');
+        }
+    }
+
+    public function delete($id)
+    {
+        Cart::destroy($id);
+        return redirect()->route('cart');
     }
 }
