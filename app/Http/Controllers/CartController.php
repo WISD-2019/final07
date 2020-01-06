@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
+use App\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use DB;
@@ -134,4 +135,6 @@ class CartController extends Controller
         Cart::destroy($id);
         return redirect()->route('cart');
     }
+
+
 }
