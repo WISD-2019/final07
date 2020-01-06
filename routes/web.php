@@ -54,3 +54,6 @@ Route::get('cart/{id}/{q}','CartController@update')->name('cart_update');
 
 //購物車項目刪除
 Route::delete('cart/{id}','CartController@delete')->name('cart_delete');
+
+//結帳
+Route::get('checkout','CheckoutController@checkout')->name('checkout');
