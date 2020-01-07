@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+@extends('layouts.app')
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -95,7 +96,7 @@
                                     <span>
                                     {{$product->productname}}
                                     </span>
-                                    <a href="{{route('detail'),['id'=>$product->id]}}">
+                                    <a href="{{route('detail'),[$product->id]}}">
                                         <h6> {{$product->productname}}</h6>
                                     </a>
                                     <p class="product-price"> ${{$product->price}}</p>
@@ -104,7 +105,7 @@
                                     <div class="hover-content">
                                         <!-- Add to Cart -->
                                         <div class="add-to-cart-btn">
-                                            <a href="{{route('cart_add'),['id'=>$good->id]}}" class="btn essence-btn">新增至購物車</a>
+                                            <a href="{{route('cart_add'),['id'=>$product->id]}}" class="btn essence-btn">新增至購物車</a>
                                         </div>
                                     </div>
                                 </div>
