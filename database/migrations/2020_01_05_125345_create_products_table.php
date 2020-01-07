@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('remarks');
             $table->integer('price');
             $table->integer('discount');
+            $table->string('type');
             $table->timestamps();
         });
     }
