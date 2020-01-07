@@ -29,7 +29,7 @@ Route::get('shopprice/desc','ProductController@desc')->name('desc');
 
 
 //顯示商品詳細資訊
-Route::get('detail/{id}','ProductController@shop')->name('detail');
+Route::get('detail/{id}','ShopDetailController@detail')->name('detail');
 
 //搜尋
 Route::get('search','ProductController@search')->name('search');
